@@ -10,7 +10,6 @@ function DatabaseProvider ({ children }) {
 
   const fetchUniversities = async (params) => {
     const result = await api.get(UNIVERSITIES, { params })
-    console.log(result)
     setUniversities(result.data)
   }
 

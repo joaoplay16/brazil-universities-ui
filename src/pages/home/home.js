@@ -7,7 +7,7 @@ import { useDatabase } from 'hooks'
 import { H5, H4, TextField, Divider } from 'ui'
 import { DETAILS } from 'routes'
 
-const Main = () => {
+const Home = () => {
   const { universities, fetchUniversities } = useDatabase()
   const [params, setParams] = useState({
     pageNumber: 1,
@@ -64,7 +64,12 @@ const Main = () => {
             <List component='nav' xs={12}>
               {universities.docs && universities.docs.map((university) => (
                 <React.Fragment key={university._id}>
-                  <ListLink button to={`${DETAILS}${university._id}`}>
+                  <ListLink
+                    button to={{
+                      pathname: `${DETAILS}${university._id}`,
+                      state: university
+                    }}
+                  >
                     <ListItemText
                       primary={university.name}
                       secondary={university.state_province}
@@ -105,4 +110,4 @@ const ListLink = styled(ListItem).attrs({
 
 `
 
-export default Main
+export default Home

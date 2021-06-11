@@ -1,4 +1,5 @@
 export { default as Button } from './link-button'
+export { default as PaperContainer } from './paper-container'
 export { default as Content } from './content'
 export { default as Divider } from './divider'
 export { default as Spacer } from './spacer'

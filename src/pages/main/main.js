@@ -3,11 +3,15 @@ import {
   withStyles
 } from '@material-ui/core'
 import Header from './header'
-import { HOME } from 'routes'
+import { HOME, DETAILS } from 'routes'
 import { Route, Switch } from 'react-router'
 
 const Home = lazy(
   () => import('pages/home')
+)
+
+const Details = lazy(
+  () => import('pages/details')
 )
 
 const Main = () => {
@@ -18,6 +22,7 @@ const Main = () => {
       <Suspense fallback='Loading'>
         <Switch>
           <Route path={HOME} exact component={Home} />
+          <Route path={`${DETAILS}:id`} component={Details} />
         </Switch>
       </Suspense>
     </>

@@ -8,6 +8,7 @@ import {
   MuiThemeProvider
 } from '@material-ui/core'
 import App from './app'
+import { DatabaseProvider } from 'contexts/database'
 
 const theme = createMuiTheme({
   typography: {
@@ -35,11 +36,13 @@ const Root = () => {
   return (
     <MuiThemeProvider theme={theme}>
       <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <GlobalStyle />
-        <BrowserRouter>
-          <Route component={App} />
-        </BrowserRouter>
+        <DatabaseProvider>
+          <CssBaseline />
+          <GlobalStyle />
+          <BrowserRouter>
+            <Route component={App} />
+          </BrowserRouter>
+        </DatabaseProvider>
       </ThemeProvider>
     </MuiThemeProvider>
   )

@@ -9,9 +9,7 @@ import { Link } from 'react-router-dom'
 const Header = () => {
   return (
     <AppBar>
-      <Toolbar>
-       
-      </Toolbar>
+      <Toolbar />
     </AppBar>
   )
 }

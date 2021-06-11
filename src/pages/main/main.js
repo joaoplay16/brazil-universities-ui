@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import {
   withStyles
 } from '@material-ui/core'
 import Header from './header'
-import { Content } from 'ui'
+import { HOME } from 'routes'
+import { Route, Switch } from 'react-router'
 
-const Home = React.lazy(
-  () => import('pages/main')
+const Home = lazy(
+  () => import('pages/home')
 )
 
 const Main = () => {
@@ -14,10 +15,11 @@ const Main = () => {
     <>
       <Header />
       <Spacer />
-      <Content>
-        <h1>ok</h1>
-
-      </Content>
+      <Suspense fallback='Loading'>
+        <Switch>
+          <Route path={HOME} exact component={Home} />
+        </Switch>
+      </Suspense>
     </>
   )
 }

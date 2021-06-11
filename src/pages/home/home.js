@@ -1,9 +1,11 @@
-import { Button, Grid, List, ListItem, ListItemText, TablePagination } from '@material-ui/core'
+import { Grid, List, ListItem, ListItemText } from '@material-ui/core'
 import { Pagination } from '@material-ui/lab'
 import styled from 'styled-components'
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useDatabase } from 'hooks'
-import { Divider, H5, H4, TextField } from 'ui'
+import { H5, H4, TextField, Divider } from 'ui'
+import { DETAILS } from 'routes'
 
 const Main = () => {
   const { universities, fetchUniversities } = useDatabase()
@@ -62,16 +64,13 @@ const Main = () => {
             <List component='nav' xs={12}>
               {universities.docs && universities.docs.map((university) => (
                 <React.Fragment key={university._id}>
-                  <ListItem
-                    alignItems='center'
-                  >
+                  <ListLink button to={`${DETAILS}${university._id}`}>
                     <ListItemText
                       primary={university.name}
                       secondary={university.state_province}
                     />
-
-                  </ListItem>
-                  <Divider />
+                  </ListLink>
+                  <Divider variant='inset' component='hr' />
                 </React.Fragment>
               ))}
             </List>
@@ -98,6 +97,12 @@ const Main = () => {
 
 const SearchContainer = styled(Grid)`
   margin-top: 30px;
+`
+
+const ListLink = styled(ListItem).attrs({
+  component: Link
+})`
+
 `
 
 export default Main

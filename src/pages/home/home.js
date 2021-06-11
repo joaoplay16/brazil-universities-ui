@@ -1,52 +1,38 @@
-import { Grid, List, ListItem, ListItemText } from '@material-ui/core'
+import { Button, Grid, List, ListItem, ListItemText, TablePagination } from '@material-ui/core'
+import { Pagination } from '@material-ui/lab'
 import styled from 'styled-components'
 import React, { useEffect, useState } from 'react'
 import { useDatabase } from 'hooks'
-import { Button, Divider, H5, TextField } from 'ui'
+import { Divider, H5, H4, TextField } from 'ui'
 
 const Main = () => {
   const { universities, fetchUniversities } = useDatabase()
   const [params, setParams] = useState({
     pageNumber: 1,
-    pageLimit: 10,
+    pagesLimit: 5,
     universityName: ''
   })
+
+  const totalPages = universities.pages
+  const currentPage = params.pageNumber
+
   useEffect(() => {
     fetchUniversities({ ...params })
   }, [])
 
   useEffect(() => {
-    console.log(params)
     fetchUniversities({ ...params })
   }, [params])
 
-  const canGoToNextPage = () => {
-    const totalPages = universities.pages
-    const currentPage = params.pageNumber
-    return currentPage < totalPages
+  const setPage = (page) => {
+    setParams(prevState => ({
+      ...prevState,
+      pageNumber: page
+    }))
   }
 
-  const canGoToPreviousPage = () => {
-    const currentPage = params.pageNumber
-    return currentPage > 1
-  }
-
-  const nextPage = () => {
-    if (canGoToNextPage()) {
-      setParams(prevState => ({
-        ...prevState,
-        pageNumber: prevState.pageNumber + 1
-      }))
-    }
-  }
-
-  const previousPage = () => {
-    if (canGoToPreviousPage()) {
-      setParams(prevState => ({
-        ...prevState,
-        pageNumber: prevState.pageNumber - 1
-      }))
-    }
+  const handleChangePage = (e, value) => {
+    setPage(value)
   }
 
   const handleSearch = (e) => {
@@ -62,6 +48,9 @@ const Main = () => {
     <>
       <SearchContainer container justify='center'>
         <Grid item sm={10} lg={8} md={8} xs={11}>
+          <Grid item>
+            <H4>Buscador de universidades do Brasil</H4>
+          </Grid>
           <Grid item>
             <TextField
               label='Buscar universidade'
@@ -89,21 +78,17 @@ const Main = () => {
           </Grid>
 
           {universities.pages > 1 && <Grid container justify='center'>
-            <Button
+            <Pagination
+              page={currentPage}
+              count={totalPages}
+              onChange={handleChangePage}
+              color='secondary'
               variant='outlined'
-              color='primary'
-              disabled={!canGoToPreviousPage()}
-              onClick={previousPage}
-            >Anterior
-            </Button>
+            />
+          </Grid>}
 
-            <H5> pagina {params.pageNumber} de {universities.pages} </H5>
-            <Button
-              variant='outlined'
-              color='primary' disabled={!canGoToNextPage()}
-              onClick={nextPage}
-            >Proximo
-            </Button>
+          {(universities.docs && universities.docs.length == 0) && <Grid item>
+            <H5>Nenhuma universidade encontrada</H5>
           </Grid>}
         </Grid>
       </SearchContainer>

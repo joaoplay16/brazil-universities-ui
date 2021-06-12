@@ -1,8 +1,8 @@
-import { Grid, Chip } from '@material-ui/core'
+import { Grid, Chip, Button } from '@material-ui/core'
 import React, { useEffect } from 'react'
 import { H4, H5, Content, PaperContainer } from 'ui'
 
-const Details = ({ location }) => {
+const Details = ({ location, history }) => {
   const university = location.state
   useEffect(() => {
     console.log(university.domains)
@@ -48,6 +48,13 @@ const Details = ({ location }) => {
                     ))
                   )}
                 </Grid>
+              </Grid>
+              <Grid item>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  onClick={() => history.goBack()}
+                >voltar</Button>
               </Grid>
             </Grid>
           </PaperContainer>

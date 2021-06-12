@@ -1,4 +1,4 @@
-import { Grid, Chip, Button, FormGroup, Typography } from '@material-ui/core'
+import { Grid, Chip, Button, FormGroup, Typography, Slide, ButtonGroup } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
 import { useDatabase } from 'hooks'
 import React, { useEffect, useState, useRef } from 'react'
@@ -8,7 +8,7 @@ function SlideTransition (props) {
   return <Slide {...props} direction='up' />
 }
 
-const New = () => {
+const New = ({ history }) => {
   const domainInputRef = useRef()
   const webPageInputRef = useRef()
 
@@ -204,12 +204,20 @@ const New = () => {
                   </Grid>
                 </Grid>
                 <Grid container item spacing={1} justify='center'>
+                <ButtonGroup disableElevation variant='contained' color='primary'>
                   <Button
                     type='submit'
                     variant='contained'
                     color='secondary'
                   >Salvar
                   </Button>
+                  <Button
+                      variant='outlined'
+                      color='secondary'
+                      onClick={() => { history.goBack() }}
+                    >Voltar
+                    </Button>
+                  </ButtonGroup>
                 </Grid>
               </Grid>
             </PaperContainer>

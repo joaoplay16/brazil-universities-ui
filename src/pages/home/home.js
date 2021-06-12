@@ -1,5 +1,5 @@
-import { Grid, IconButton, List, ListItem, ListItemSecondaryAction, ListItemText } from '@material-ui/core'
-import { Pagination } from '@material-ui/lab'
+import { Grid, IconButton, List, ListItem, ListItemSecondaryAction, ListItemText, Typography } from '@material-ui/core'
+import { Pagination, Alert } from '@material-ui/lab'
 import {
   Delete as DeleteIcon,
   Edit as EditIcon
@@ -8,8 +8,8 @@ import styled from 'styled-components'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDatabase } from 'hooks'
-import { H5, H4, TextField, Divider, Dialog, Snackbar } from 'ui'
-import { DETAILS, UPDATE } from 'routes'
+import { H5, H4, TextField, Divider, Dialog, Snackbar, Content, Button, Spacer } from 'ui'
+import { DETAILS, NEW, UPDATE } from 'routes'
 
 const Home = () => {
   const { universities, fetchUniversities, deleteUniversity } = useDatabase()
@@ -96,8 +96,8 @@ const Home = () => {
   }
 
   return (
-    <>
-      <SearchContainer container justify='center'>
+    <Content>
+      <Grid container justify='center'>
         <Grid item sm={10} lg={8} md={8} xs={11}>
           <Grid item>
             <H4>Buscador de universidades do Brasil</H4>
@@ -108,6 +108,16 @@ const Home = () => {
               variant='outlined'
               onChange={handleSearch}
             />
+          </Grid>
+          <Spacer />
+          <Grid container justify='flex-end'>
+            <Button
+              to={NEW}
+              variant='contained'
+              color='secondary'
+            >
+              Adicionar nova
+            </Button>
           </Grid>
           <Grid item>
             <List component='nav' xs={12}>
@@ -162,7 +172,13 @@ const Home = () => {
           </Grid>}
 
           {(universities.docs && universities.docs.length == 0) && <Grid item>
-            <H5>Nenhuma universidade encontrada</H5>
+            <Alert severity='info'>
+              <Typography
+                variant='subtitle1'
+              >
+                Nenhuma universidade encontrada
+              </Typography>
+            </Alert>
           </Grid>}
 
           <Dialog
@@ -176,21 +192,17 @@ const Home = () => {
           />
           <Snackbar
             open={snackBar.open}
-            success={snackBar.success}
+            success={snackBar.success ? 1 : 0}
             autoHideDuration={3000}
             onClose={handleCloseSnackbar}
             message={snackBar.message}
             key={snackBar.message}
           />
         </Grid>
-      </SearchContainer>
-    </>
+      </Grid>
+    </Content>
   )
 }
-
-const SearchContainer = styled(Grid)`
-  margin-top: 30px;
-`
 
 const ListLink = styled(ListItem).attrs({
   component: Link

@@ -218,7 +218,7 @@ const New = ({ history }) => {
             </PaperContainer>
             <Snackbar
               open={snackBar.open}
-              success={snackBar.success}
+              success={snackBar.success ? 1 : 0}
               onClose={handleCloseSnackbar}
               autoHideDuration={3000}
               message={snackBar.message}

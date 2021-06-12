@@ -83,13 +83,13 @@ const Update = ({ location, history }) => {
     e.preventDefault()
 
     updateUniversity(university).then(response => {
-      if (response.status === 200) {
-        setSnackBar({
-          open: true,
-          success: true,
-          message: 'Universidade atualizada com sucesso'
-        })
-      }
+      setSnackBar({
+        open: true,
+        success: true,
+        message: 'Universidade atualizada com sucesso'
+      })
+
+      console.log('SUCESSO')
     }).catch(err => {
       setSnackBar({
         open: true,
@@ -208,14 +208,12 @@ const Update = ({ location, history }) => {
             </PaperContainer>
             <Snackbar
               open={snackBar.open}
-              onClose={handleCloseSnackbar}
+              success={snackBar.success ? 1 : 0}
               autoHideDuration={3000}
+              onClose={handleCloseSnackbar}
+              message={snackBar.message}
               key={snackBar.message}
-            >
-              <Alert variant='filled' severity={snackBar.success ? 'success' : 'error'}>
-                {snackBar.message}
-              </Alert>
-            </Snackbar>
+            />
           </Grid>
         </Grid>
       </form>

@@ -100,7 +100,7 @@ const Home = () => {
       <Grid container justify='center'>
         <Grid item sm={10} lg={8} md={8} xs={11}>
           <Grid item>
-            <H4>Buscador de universidades do Brasil</H4>
+            <H4>Universidades do Brasil</H4>
           </Grid>
           <Grid item>
             <TextField

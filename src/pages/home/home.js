@@ -1,11 +1,15 @@
-import { Grid, List, ListItem, ListItemText } from '@material-ui/core'
+import { Grid, IconButton, List, ListItem, ListItemSecondaryAction, ListItemText } from '@material-ui/core'
 import { Pagination } from '@material-ui/lab'
+import {
+  Delete as DeleteIcon,
+  Edit as EditIcon
+} from '@material-ui/icons'
 import styled from 'styled-components'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDatabase } from 'hooks'
 import { H5, H4, TextField, Divider } from 'ui'
-import { DETAILS } from 'routes'
+import { DETAILS, UPDATE } from 'routes'
 
 const Home = () => {
   const { universities, fetchUniversities } = useDatabase()
@@ -74,7 +78,27 @@ const Home = () => {
                       primary={university.name}
                       secondary={university.state_province}
                     />
+                    <ListItemSecondaryAction>
+                      <IconButton
+                        color='secondary'
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                      <IconButton
+                        to={{
+                          pathname: `${UPDATE}${university._id}`,
+                          state: {
+                            university
+                          }
+                        }}
+                        component={Link}
+                        color='secondary'
+                      >
+                        <EditIcon />
+                      </IconButton>
+                    </ListItemSecondaryAction>
                   </ListLink>
+
                   <Divider variant='inset' component='hr' />
                 </React.Fragment>
               ))}

@@ -1,14 +1,15 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
 import api from 'services'
 const DatabaseContext = createContext()
 
 const UNIVERSITIES = '/search'
 const NEW_UNIVESITY = '/new'
+const UPDATE_UNIVERSITY = '/update/'
 
 function DatabaseProvider ({ children }) {
   const [universities, setUniversities] = useState(() => [])
-  const [responseSaveUniversity, setUniversity] = useState(() => [])
+  const [responseSaveUniversity, setUniversity] = useState(() => ({}))
 
   const fetchUniversities = async (params) => {
     const result = await api.get(UNIVERSITIES, { params })
@@ -24,12 +25,20 @@ function DatabaseProvider ({ children }) {
       })
   }
 
+  const updateUniversity = (university) => {
+    return api.put(UPDATE_UNIVERSITY + university._id, university)
+      .then((response) => {
+        return response
+      })
+  }
+
   return (
     <DatabaseContext.Provider
       value={{
         universities,
         fetchUniversities,
         addUniversity,
+        updateUniversity,
         responseSaveUniversity
       }}
     >

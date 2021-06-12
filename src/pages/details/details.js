@@ -51,10 +51,11 @@ const Details = ({ location, history }) => {
               </Grid>
               <Grid item>
                 <Button
-                  variant="outlined"
-                  color="secondary"
+                  variant='outlined'
+                  color='secondary'
                   onClick={() => history.goBack()}
-                >voltar</Button>
+                >voltar
+                </Button>
               </Grid>
             </Grid>
           </PaperContainer>

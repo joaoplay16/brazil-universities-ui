@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from 'react'
 import {
+  LinearProgress,
   withStyles
 } from '@material-ui/core'
 import Header from './header'
@@ -24,7 +25,7 @@ const Main = () => {
     <>
       <Header />
       <Spacer />
-      <Suspense fallback='Loading'>
+      <Suspense fallback={<LinearProgress color="secondary"/>}>
         <Switch>
           <Route path={HOME} exact component={Home} />
           <Route path={NEW} component={New} />

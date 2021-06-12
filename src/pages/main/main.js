@@ -25,7 +25,7 @@ const Main = () => {
     <>
       <Header />
       <Spacer />
-      <Suspense fallback={<LinearProgress color="secondary"/>}>
+      <Suspense fallback={<LinearProgress color='secondary' />}>
         <Switch>
           <Route path={HOME} exact component={Home} />
           <Route path={NEW} component={New} />

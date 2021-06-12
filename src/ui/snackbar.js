@@ -1,5 +1,6 @@
 import React from 'react'
 import { Snackbar as MaterialSnackbar, Slide } from '@material-ui/core'
+import { Alert } from '@material-ui/lab'
 
 function SlideTransition (props) {
   return <Slide {...props} direction='up' />
@@ -11,7 +12,9 @@ const Snackbar = (props) =>
       {...props}
       TransitionComponent={SlideTransition}
     >
-      {props.children}
+      <Alert variant='filled' severity={props.success ? 'success' : 'error'}>
+        {props.message}
+      </Alert>
     </MaterialSnackbar>
   )
 

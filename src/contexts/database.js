@@ -6,6 +6,7 @@ const DatabaseContext = createContext()
 const UNIVERSITIES = '/search'
 const NEW_UNIVESITY = '/new'
 const UPDATE_UNIVERSITY = '/update/'
+const DELETE_UNIVERSITY = '/remove/'
 
 function DatabaseProvider ({ children }) {
   const [universities, setUniversities] = useState(() => [])
@@ -32,6 +33,13 @@ function DatabaseProvider ({ children }) {
       })
   }
 
+  const deleteUniversity = (university) => {
+    return api.delete(DELETE_UNIVERSITY + university._id)
+      .then((response) => {
+        return response
+      })
+  }
+
   return (
     <DatabaseContext.Provider
       value={{
@@ -39,6 +47,7 @@ function DatabaseProvider ({ children }) {
         fetchUniversities,
         addUniversity,
         updateUniversity,
+        deleteUniversity,
         responseSaveUniversity
       }}
     >

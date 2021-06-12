@@ -1,12 +1,7 @@
-import { Grid, Chip, Button, FormGroup, Typography, Slide, ButtonGroup } from '@material-ui/core'
-import { Alert } from '@material-ui/lab'
+import { Grid, Chip, Button, FormGroup, Typography, ButtonGroup } from '@material-ui/core'
 import { useDatabase } from 'hooks'
 import React, { useEffect, useState, useRef } from 'react'
 import { H4, Content, PaperContainer, TextField, Snackbar } from 'ui'
-
-function SlideTransition (props) {
-  return <Slide {...props} direction='up' />
-}
 
 const New = ({ history }) => {
   const domainInputRef = useRef()
@@ -204,14 +199,14 @@ const New = ({ history }) => {
                   </Grid>
                 </Grid>
                 <Grid container item spacing={1} justify='center'>
-                <ButtonGroup disableElevation variant='contained' color='primary'>
-                  <Button
-                    type='submit'
-                    variant='contained'
-                    color='secondary'
-                  >Salvar
-                  </Button>
-                  <Button
+                  <ButtonGroup disableElevation variant='contained' color='primary'>
+                    <Button
+                      type='submit'
+                      variant='contained'
+                      color='secondary'
+                    >Salvar
+                    </Button>
+                    <Button
                       variant='outlined'
                       color='secondary'
                       onClick={() => { history.goBack() }}
@@ -223,15 +218,12 @@ const New = ({ history }) => {
             </PaperContainer>
             <Snackbar
               open={snackBar.open}
+              success={snackBar.success}
               onClose={handleCloseSnackbar}
-              TransitionComponent={SlideTransition}
               autoHideDuration={3000}
+              message={snackBar.message}
               key={snackBar.message}
-            >
-              <Alert variant='filled' severity={snackBar.success ? 'success' : 'error'}>
-                {snackBar.message}
-              </Alert>
-            </Snackbar>
+            />
           </Grid>
         </Grid>
       </form>

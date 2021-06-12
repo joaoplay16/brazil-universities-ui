@@ -1,12 +1,8 @@
-import { Grid, Chip, Button, FormGroup, Typography, ButtonGroup, Slide } from '@material-ui/core'
+import { Grid, Chip, Button, FormGroup, Typography, ButtonGroup } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
 import { useDatabase } from 'hooks'
 import React, { useState, useRef } from 'react'
 import { H4, Content, PaperContainer, TextField, Snackbar } from 'ui'
-
-function SlideTransition (props) {
-  return <Slide {...props} direction='up' />
-}
 
 const Update = ({ location, history }) => {
   const domainInputRef = useRef()
@@ -213,7 +209,6 @@ const Update = ({ location, history }) => {
             <Snackbar
               open={snackBar.open}
               onClose={handleCloseSnackbar}
-              TransitionComponent={SlideTransition}
               autoHideDuration={3000}
               key={snackBar.message}
             >

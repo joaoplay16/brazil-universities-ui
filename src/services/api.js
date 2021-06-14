@@ -10,7 +10,7 @@ switch (process.env.REACT_APP_ENVIRONMENT) {
     HOST = `http://localhost:${PORT}`
     break
   default:
-    HOST = `http://localhost:${PORT}`
+    HOST = `https://brazil-universities-api.herokuapp.com`
 }
 
 // url base

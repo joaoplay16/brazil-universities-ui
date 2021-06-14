@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useState } from 'react'
+import React, { createContext, useState } from 'react'
 import PropTypes from 'prop-types'
 import api from 'services'
 const DatabaseContext = createContext()

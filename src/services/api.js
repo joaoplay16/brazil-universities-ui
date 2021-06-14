@@ -1,10 +1,10 @@
 import axios from 'axios'
-const PORT = 8088
+const PORT = 8080
 let HOST = `http://localhost:${PORT}`
 
 switch (process.env.REACT_APP_ENVIRONMENT) {
   case 'production':
-    HOST = `https://brazil-universities-api.herokuapp.com`
+    HOST = `http://localhost:${PORT}`
     break
   case 'test':
     HOST = `http://localhost:${PORT}`

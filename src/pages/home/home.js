@@ -8,7 +8,7 @@ import styled from 'styled-components'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDatabase } from 'hooks'
-import { H5, H4, TextField, Divider, Dialog, Snackbar, Content, Button, Spacer } from 'ui'
+import { H4, TextField, Divider, Dialog, Snackbar, Content, Button, Spacer } from 'ui'
 import { DETAILS, NEW, UPDATE } from 'routes'
 
 const Home = () => {

@@ -62,7 +62,7 @@ const Home = () => {
 
   const handleDeleteUniversity = (e) => {
     deleteUniversity(universityToDelete).then(response => {
-      fetchUniversities()
+      fetchUniversities({...params})
       setSnackBar({
         open: true,
         success: true,

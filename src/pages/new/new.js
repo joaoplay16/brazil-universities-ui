@@ -1,13 +1,13 @@
 import { Grid, Chip, Button, FormGroup, Typography, ButtonGroup } from '@material-ui/core'
 import { useDatabase } from 'hooks'
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { H4, Content, PaperContainer, TextField, Snackbar } from 'ui'
 
 const New = ({ history }) => {
   const domainInputRef = useRef()
   const webPageInputRef = useRef()
 
-  const { responseSaveUniversity, addUniversity } = useDatabase()
+  const { addUniversity } = useDatabase()
   const defaultUniversityData =
     {
       name: '',
@@ -23,25 +23,6 @@ const New = ({ history }) => {
     success: false,
     message: ''
   }))
-
-  useEffect(() => {
-    if (responseSaveUniversity.status == 201) {
-      setSnackBar({
-        open: true,
-        success: true,
-        message: 'Universidade cadastrada com sucesso'
-      })
-      setUniversity(defaultUniversityData)
-      domainInputRef.current.value = null
-      webPageInputRef.current.value = null
-    } else if (responseSaveUniversity.status == 500) {
-      setSnackBar({
-        open: true,
-        success: true,
-        message: 'Erro ao cadastrar universidade'
-      })
-    }
-  }, [responseSaveUniversity])
 
   const handleCloseSnackbar = () => {
     setSnackBar({
@@ -106,7 +87,23 @@ const New = ({ history }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    addUniversity(university)
+
+    addUniversity(university).then(response => {
+      setSnackBar({
+        open: true,
+        success: true,
+        message: 'Universidade cadastrada com sucesso'
+      })
+      setUniversity(defaultUniversityData)
+      domainInputRef.current.value = null
+      webPageInputRef.current.value = null
+    }).catch(err => {
+      setSnackBar({
+        open: true,
+        success: true,
+        message: 'Erro ao cadastrar universidade'
+      })
+    })
   }
 
   return (

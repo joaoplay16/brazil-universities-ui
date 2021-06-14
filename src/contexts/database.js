@@ -10,7 +10,6 @@ const DELETE_UNIVERSITY = '/remove/'
 
 function DatabaseProvider ({ children }) {
   const [universities, setUniversities] = useState(() => [])
-  const [responseSaveUniversity, setUniversity] = useState(() => ({}))
 
   const fetchUniversities = async (params) => {
     const result = await api.get(UNIVERSITIES, { params })
@@ -18,11 +17,9 @@ function DatabaseProvider ({ children }) {
   }
 
   const addUniversity = (university) => {
-    api.post(NEW_UNIVESITY, university)
+    return api.post(NEW_UNIVESITY, university)
       .then((response) => {
-        setUniversity(response)
-      }).catch(err => {
-        setUniversity(err.response)
+        return response
       })
   }
 
@@ -48,7 +45,6 @@ function DatabaseProvider ({ children }) {
         addUniversity,
         updateUniversity,
         deleteUniversity,
-        responseSaveUniversity
       }}
     >
       {children}
